@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список всех пожертвований</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+    </style>
+</head>
+<body>
+
+    <h1>Все пожертвования</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Категория</th>
+                <th>Сумма (руб.)</th>
+                <th>Дата и время</th>
+                <th>Индекс операции</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in donations_list %}
+                <tr>
+                    <td>{{ item.get_category_display }}</td>
+                    <td>{{ item.amount|floatformat:2 }}</td>
+                    <td>{{ item.created_at|date:"d.m.Y H:i" }}</td>
+                    <td>{{ item.operation_index }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4" style="text-align: center;">
+                        Пока не было сделано ни одного пожертвования.
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

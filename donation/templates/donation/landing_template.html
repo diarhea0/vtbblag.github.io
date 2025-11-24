@@ -1,0 +1,78 @@
+{% load static %}
+
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} | VTB Благотворительность</title>
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Дополнительные стили, чтобы центрировать контент на целевой странице,
+           используя элементы из main.css */
+        .landing-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: -100px; /* Смещение вверх */
+        }
+        .landing-box {
+            background-color: #83A2DB; /* Цвет как у .info */
+            padding: 40px;
+            border-radius: 20px;
+            width: 700px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .landing-box h2 {
+            font-size: 72px; /* Увеличенный размер для заголовка */
+            font-weight: 900;
+            color: #1E2124;
+            margin-bottom: 20px;
+        }
+        .landing-box p {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            color: #1E2124;
+        }
+        .landing-button {
+            width: 450px;
+            height: 70px;
+            font-size: 24px;
+            font-weight: 800;
+            background-color: #4E8CFF;
+            color: #fff;
+            border: 0;
+            border-radius: 20px;
+            cursor: pointer;
+            text-decoration: none; /* Убираем подчеркивание у ссылки */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .landing-button:hover {
+            background-color: #FFF;
+            color: #4E8CFF;
+        }
+    </style>
+</head>
+<body class="landing-page">
+    <div class="landing-container">
+        <div class="landing-box">
+            <p class="gav">КАТЕГОРИЯ</p>
+            <h2>{{ title }}</h2>
+            <p>{{ description }}</p>
+            <a href="{{ bank_link }}" class="landing-button" target="_blank">
+                ПЕРЕЙТИ В ПРИЛОЖЕНИЕ БАНКА
+            </a>
+        </div>
+    </div>
+</body>
+</html>

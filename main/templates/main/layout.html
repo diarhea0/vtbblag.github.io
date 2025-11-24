@@ -1,0 +1,192 @@
+{% load static %}
+
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VTB Благотворительность</title>
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+
+    <header>
+        <div class="info">
+            <div class="textblock">
+                <p class="gav">СБОРЫ</p>
+                <p class="numbers_are_say">Цифры говорят<br>сами за себя</p>
+                <p class="other">Общая сумма всех пожертвований<br>собранных на платформе.<br>Каждый рубль имеет значение.</p>
+            </div>
+            <div class="morestat">
+                <p>Более чем 5.000.000 рублей <br>Почти 500 проектов</p>
+                <button id="scrollButton" >подробная статистика</button>
+            </div>
+            <button id="scrollButton1">ВНЕСТИ СВОЙ ВКЛАД В ОБЩЕЕ ДЕЛО</button>
+            <script>
+            const button = document.getElementById('scrollButton');
+
+                button.addEventListener('click', () => {
+                const element = document.getElementById('targetElement');
+                const elementPosition = element.getBoundingClientRect();
+                const offset = elementPosition.top + window.scrollY;
+
+                window.scrollTo({
+                top: offset,
+                behavior: 'smooth'
+                });
+            });
+            const button1 = document.getElementById('scrollButton1');
+
+                button1.addEventListener('click', () => {
+                const element = document.getElementById('targetElement1');
+                const elementPosition = element.getBoundingClientRect();
+                const offset = elementPosition.top + window.scrollY;
+
+                window.scrollTo({
+                top: offset,
+                behavior: 'smooth'
+                });
+            });
+            </script>
+        </div>
+        <div class="hvtb">
+            <p>твори добро <br> вместе с нами</p>
+            <h1>VTB</h1>
+        </div>
+    </header>
+
+
+
+
+    <main>
+        <div class="whiteline"></div>
+        <div class="goyda">
+            <p class="hitler">НАШИ ЦЕЛИ</p>
+            <div class="blocks">
+                <div class="dogs"><p>помощь брошеным животным</p></div>
+                <div class="homeless"><p>помощь бездомным</p></div>
+                <div class="niggers"><p>помощь больным детям</p></div>
+            </div>
+            <p class="other_cats">и другие категории</p>
+        </div>
+        <div class="whiteline" id="sec"></div>
+        <div class="statistic" id="targetElement">
+            <p class="stat">СТАТИСТИКА</p>
+            <div class="table">
+                <p class="slogan">Меняем мир к<br>лучшему, объединяя<br> усилия. Потому что<br>даже самая<br>маленькая помощь –<br>это большой шаг.</p>
+                <div class="statistic_blocks">
+                    <div class="left_block">
+                        <div class="name">
+                            <p>ДЕТЯМ</p>
+                        </div>
+                    <div class="stata">
+                        <p id="fst"><span>Сумма:</span> {{ kids_sum|floatformat:2 }} руб.</p>
+                        <p id="sec"><span>Кол-во:</span> {{ kids_count|default:0 }} шт.</p>
+                        <p id="thr"><span>Средний:</span> {{ kids_avg|floatformat:2 }} руб.</p>
+                    </div>
+                </div>
+
+                <div class="center_block">
+                    <div class="name">
+                        <p>ДРУГОЕ</p>
+                    </div>
+                    <div class="stata">
+                        <p id="fst"><span>Сумма:</span> {{ other_sum|floatformat:2 }} руб.</p>
+                        <p id="sec"><span>Кол-во:</span> {{ other_count|default:0 }} шт.</p>
+                        <p id="thr"><span>Средний:</span> {{ other_avg|floatformat:2 }} руб.</p>
+                    </div>
+                </div>
+
+                <div class="right_block">
+                    <div class="name">
+                        <p>ВСЕГО</p>
+                    </div>
+                    <div class="stata">
+                        <p id="fst"><span>Сумма:</span> {{ total_sum|floatformat:2 }} руб.</p>
+                        <p id="sec"><span>Кол-во:</span> {{ total_count|default:0 }} шт.</p>
+                        <p id="thras"><span>Средний:</span> {{ total_avg|floatformat:2 }} руб.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="donation">
+
+
+            <form method="POST" action="{% url 'process_donation' %}">
+
+                {% csrf_token %}
+
+                <select id="mySelect" name="category"> <option value="" disabled selected>Выберите категорию</option>
+
+                    <option value="ДЕТИ">Детям</option>
+                    <option value="ЖИВОТНЫЕ">Животным</option>
+                    <option value="БОЛЬНЫЕ">Больным</option>
+                </select>
+
+                <p class="pop">
+                    <input type="number" name="amount" placeholder="Введите сумму" step="0.01" required />
+                </p>
+
+                <div class="submit" id="targetElement1">
+                    <input type="submit" value="Перейти к отправке" />
+                </div>
+            </form>
+
+
+<!--            <form>-->
+<!--                    <select id="mySelect" onchange="updateFormAndMenuText()">-->
+<!--                        <option value="" disabled selected>Выберите категорию</option>-->
+<!--                        <option value="Опция 1">Детям</option>-->
+<!--                        <option value="Опция 2">Животным</option>-->
+<!--                        <option value="Опция 3">Больным</option>-->
+<!--                    </select>-->
+
+<!--                <p class="pop"><input type="number" name="Сумма" placeholder="Введите сумму" /></p>-->
+
+<!--                <div class="submit" id="targetElement1">-->
+<!--                    <input type="submit" value="Перейти к отправке" />-->
+<!--                </div>-->
+<!--                <script>-->
+<!--                    function updateFormAndMenuText() {-->
+<!--    // 1. Получаем элементы DOM-->
+<!--                        const selectElement = document.getElementById('mySelect');-->
+<!--                        const inputElement = document.getElementById('myInput');-->
+<!--                        const displayElement = document.getElementById('selectedTextDisplay');-->
+
+<!--    // 2. Получаем выбранное значение-->
+<!--    // .value возвращает значение атрибута value выбранной <option>-->
+<!--                        const selectedValue = selectElement.value;-->
+
+<!--    // .options[selectElement.selectedIndex].text возвращает видимый текст <option>-->
+<!--    // Если атрибут value совпадает с видимым текстом, можно использовать .value-->
+<!--                        const selectedText = selectElement.options[selectElement.selectedIndex].text;-->
+
+<!--    // 3. Обновляем поле формы (<input>)-->
+<!--                        inputElement.value = selectedValue;-->
+
+<!--    // 4. Обновляем текст в элементе-заглушке-->
+<!--    // displayElement.textContent = 'Выбранный текст: ' + selectedText;-->
+
+<!--    // Опционально: можно "скрыть" сам <select> после выбора,-->
+<!--    // если вам нужно, чтобы вместо него отображался только выбранный текст:-->
+<!--    // selectElement.style.display = 'none';-->
+<!--}-->
+<!--                </script>-->
+<!--            </form>-->
+
+        </div>
+    </main>
+
+
+
+
+    <footer>
+        <div class="whiteline" id="thr"></div>
+    </footer>
+</body>
+</html>
